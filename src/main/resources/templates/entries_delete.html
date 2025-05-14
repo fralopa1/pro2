@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Odstranit záznam</title>
+</head>
+<body>
+<h1>Opravdu chcete odstranit tento záznam?</h1>
+
+<div>
+    <p><strong>Datum:</strong> <span th:text="${entry.date}">datum</span></p>
+    <p><strong>Poznámka:</strong> <span th:text="${entry.note}">poznámka</span></p>
+    <p><strong>Splněno:</strong> <span th:text="${entry.success}">true/false</span></p>
+</div>
+
+<form th:action="@{/entries/{id}/delete(id=${entry.id})}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <button type="submit">Ano, odstranit</button>
+    <a th:href="@{/entries/}">Zpět</a>
+</form>
+
+</body>
+</html>

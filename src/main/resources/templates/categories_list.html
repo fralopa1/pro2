@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Seznam kategorií</title>
+</head>
+<body>
+
+<h1>Kategorie</h1>
+
+<a th:href="@{/categories/add}">Přidat novou kategorii</a>
+
+<ul>
+    <li th:each="category : ${categories}">
+        <span th:text="${category.name}">Kategorie</span>
+        [<a th:href="@{'/categories/' + ${category.id} + '/edit'}">Upravit</a> |
+        <a th:href="@{'/categories/' + ${category.id} + '/delete'}">Smazat</a>]
+    </li>
+</ul>
+
+<a th:href="@{/}">Zpět</a>
+
+</body>
+</html>

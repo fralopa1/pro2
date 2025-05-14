@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nová kategorie</title>
+</head>
+<body>
+
+<h1>Nová kategorie</h1>
+
+
+<form th:action="@{/categories/save}" th:object="${category}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <label for="name">Název:</label>
+    <input type="text" th:field="*{name}" required />
+    <br><br>
+    <button type="submit">Uložit</button>
+    <a th:href="@{/categories/}">Zpět</a>
+</form>
+
+</body>
+</html>

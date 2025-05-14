@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Smazat výzvu</title>
+</head>
+<body>
+<h1>Opravdu chcete smazat výzvu?</h1>
+
+<p><strong>Název:</strong> <span th:text="${challenge.name}"></span></p>
+<p><strong>Popis:</strong> <span th:text="${challenge.description}"></span></p>
+
+<form th:action="@{/challenges/{id}/delete(id=${challenge.id})}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <button type="submit">Smazat</button>
+    <a href="/challenges/">Zpět</a>
+</form>
+
+</body>
+</html>

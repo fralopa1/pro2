@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Přidat výzvu</title>
+</head>
+<body>
+<h1>Přidat výzvu</h1>
+
+
+<form th:action="@{/challenges/save}" th:object="${challenge}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <div>
+        <label for="name">Název:</label>
+        <input type="text" th:field="*{name}" required/>
+    </div>
+
+    <div>
+        <label for="description">Popis:</label>
+        <textarea th:field="*{description}" rows="3" cols="40"></textarea>
+    </div>
+
+    <div>
+        <label for="startDate">Začátek:</label>
+        <input type="date" th:field="*{startDate}" required/>
+    </div>
+
+    <div>
+        <label for="endDate">Konec:</label>
+        <input type="date" th:field="*{endDate}" required/>
+    </div>
+
+    <div>
+        <label for="category">Kategorie:</label>
+        <select th:field="*{category}">
+            <option value="">-- bez kategorie --</option>
+            <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+        </select>
+    </div>
+
+    <button type="submit">Uložit</button>
+    <a href="/challenges/">Zpět</a>
+</form>
+
+</body>
+</html>

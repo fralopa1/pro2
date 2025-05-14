@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Challenge Tracker</title>
+</head>
+<body>
+<h1>Habit Challenge Tracker</h1>
+
+<p>Přihlášen jako: <span th:text="${#authentication.name}"></span></p>
+
+<a th:href="@{/challenges/}">Výzvy</a><br>
+<a th:href="@{/entries/}">Záznamy</a><br>
+
+<!-- ADMIN ONLY LINKS -->
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    <a th:href="@{/users/}">Uživatelé</a><br>
+    <a th:href="@{/categories/}">Kategorie</a><br>
+</div>
+
+<br>
+<form method="post" th:action="@{/logout}">
+    <input type="submit" value="Odhlásit se"/>
+</form>
+</body>
+</html>

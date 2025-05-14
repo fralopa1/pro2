@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail výzvy</title>
+</head>
+<body>
+<h1 th:text="${challenge.name}">Název výzvy</h1>
+
+<p><strong>Popis:</strong> <span th:text="${challenge.description}"></span></p>
+<p><strong>Začátek:</strong> <span th:text="${challenge.startDate}"></span></p>
+<p><strong>Konec:</strong> <span th:text="${challenge.endDate}"></span></p>
+<span th:text="${challenge.category != null ? challenge.category.name : '–'}"></span>
+<p><strong>Autor:</strong> <span th:text="${challenge.creator.username}"></span></p>
+
+<a th:href="@{/entries/add(challengeId=${challenge.id})}">Přidat záznam</a><br/>
+<a href="/challenges/">Zpět</a>
+
+</body>
+</html>

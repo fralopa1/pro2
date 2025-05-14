@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Smazat uživatele</title>
+</head>
+<body>
+
+<h1 th:if="${user != null}" th:text="'Opravdu chcete smazat uživatele: ' + ${user.name}"></h1>
+<h1 th:unless="${user != null}">Uživatel nenalezen.</h1>
+
+<form th:if="${user != null}" method="post"
+      th:action="@{'/users/' + ${user.id} + '/delete'}">
+    <button type="submit">Ano, smazat</button>
+    <a th:href="@{/users/}">Ne, zpět</a>
+</form>
+
+</body>
+</html>

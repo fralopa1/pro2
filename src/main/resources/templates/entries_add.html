@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Přidat záznam</title>
+</head>
+<body>
+<h1>Přidat záznam do výzvy</h1>
+
+<form th:action="@{/entries/save(challengeId=${challenge.id})}" th:object="${entry}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <div>
+        <label for="date">Datum:</label>
+        <input type="date" id="date" th:field="*{date}" required/>
+    </div>
+
+    <div>
+        <label for="note">Poznámka:</label>
+        <textarea id="note" th:field="*{note}" rows="3" cols="40"></textarea>
+    </div>
+
+    <div>
+        <label>
+            <input type="checkbox" th:field="*{success}"/>
+            Splněno
+        </label>
+    </div>
+
+    <div>
+        <button type="submit">Uložit záznam</button>
+        <a th:href="@{/entries/}">Zpět</a>
+    </div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Seznam výzev</title>
+</head>
+<body>
+<h1>Výzvy</h1>
+
+<div style="margin-bottom: 15px;">
+    <a href="/challenges/add" style="margin-right: 20px;">Přidat novou výzvu</a>
+    <a href="/">Zpět</a>
+</div>
+
+<form method="get" action="#" style="margin-bottom: 20px;">
+    <label>Kategorie:</label>
+    <select name="categoryId">
+        <option value="">Všechny</option>
+        <option th:each="cat : ${categories}"
+                th:value="${cat.id}"
+                th:text="${cat.name}"
+                th:selected="${param.categoryId == cat.id}"></option>
+    </select>
+
+    <button type="submit">Filtrovat</button>
+</form>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Název</th>
+        <th>Popis</th>
+        <th>Začátek</th>
+        <th>Konec</th>
+        <th>Kategorie</th>
+        <th>Autor</th>
+        <th>Akce</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="challenge : ${challenges}">
+        <td th:text="${challenge.name}">Název</td>
+        <td th:text="${challenge.description}">Popis</td>
+        <td th:text="${challenge.startDate}">2025-05-01</td>
+        <td th:text="${challenge.endDate}">2025-06-01</td>
+        <td th:text="${challenge.category != null ? challenge.category.name : '-'}">Zdraví</td>
+        <td th:text="${challenge.creator.username}">admin</td>
+        <td>
+            <a th:href="@{/challenges/{id}(id=${challenge.id})}">Detail</a>
+            <span th:if="${#authentication.name == challenge.creator.username or #authorization.expression('hasRole(''ADMIN'')')}">
+                | <a th:href="@{/challenges/{id}/edit(id=${challenge.id})}">Upravit</a>
+                | <a th:href="@{/challenges/{id}/delete(id=${challenge.id})}">Smazat</a>
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

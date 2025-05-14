@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Smazat kategorii</title>
+</head>
+<body>
+
+<h1 th:text="'Opravdu chcete smazat kategorii: ' + ${category.name} + '?'">Potvrzení</h1>
+
+<form th:action="@{/categories/{id}/delete(id=${category.id})}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <button type="submit">Ano, smazat</button>
+    <a th:href="@{/categories/}">Ne, zpět</a>
+</form>
+
+</body>
+</html>

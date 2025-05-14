@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Uživatelé</title>
+</head>
+<body>
+<h1>Seznam uživatelů</h1>
+
+<ul>
+    <li th:each="user : ${users}">
+        <span th:text="${user.name}">Uživatel</span>
+        —
+        <a th:href="@{'/users/' + ${user.id} + '/delete'}">Smazat</a>
+    </li>
+</ul>
+
+<a th:href="@{/}">Zpět</a>
+</body>
+</html>

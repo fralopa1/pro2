@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Seznam záznamů</title>
+</head>
+<body>
+<h1>Seznam záznamů</h1>
+
+<div style="margin-bottom: 15px;">
+    <a href="/">Zpět</a>
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Datum</th>
+        <th>Poznámka</th>
+        <th>Splněno</th>
+        <th>Výzva</th>
+        <th>Uživatel</th>
+        <th>Akce</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entry : ${entries}">
+        <td th:text="${entry.date}">datum</td>
+        <td th:text="${entry.note}">poznámka</td>
+        <td th:text="${entry.success} ? '✔' : '✘'">stav</td>
+        <td th:text="${entry.challenge.name}">výzva</td>
+        <td th:text="${entry.user != null ? entry.user.username : '-'}">uživatel</td>
+        <td>
+            <span th:if="${#authentication.name == entry.user.username or #authorization.expression('hasRole(''ADMIN'')')}">
+                <a th:href="@{/entries/{id}/edit(id=${entry.id})}">Upravit</a>
+                |
+                <a th:href="@{/entries/{id}/delete(id=${entry.id})}">Smazat</a>
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
